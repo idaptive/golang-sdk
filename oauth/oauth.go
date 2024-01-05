@@ -48,6 +48,7 @@ func GetNewClient(service string, httpFactory HttpClientFactory) (*OauthClient, 
 	if err != nil {
 		return nil, err
 	}
+	//setting secure Scheme
 	url.Scheme = "https"
 	url.Path = ""
 
