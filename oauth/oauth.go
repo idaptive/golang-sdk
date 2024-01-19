@@ -93,6 +93,16 @@ func (c *OauthClient) ClientCredentials(appID string, scope string) (*TokenRespo
 	return c.postAndGetResponse("/oauth2/token/"+appID, args)
 }
 
+func (c *OauthClient) AuthorizationCode(appID string, code_verifier string, code string, redirect_uri string, client_id string) (*TokenResponse, *ErrorResponse, error) {
+	args := make(map[string]string)
+	args["grant_type"] = "authorization_code"
+	args["client_id"] = client_id
+	args["redirect_uri"] = redirect_uri
+	args["code"] = code
+	args["code_verifier"] = code_verifier
+	return c.postAndGetResponse("/oauth2/token/"+appID, args)
+}
+
 func (c *OauthClient) RefreshToken(appID string, refreshToken string) (*TokenResponse, *ErrorResponse, error) {
 	args := make(map[string]string)
 	args["grant_type"] = "refresh_token"
